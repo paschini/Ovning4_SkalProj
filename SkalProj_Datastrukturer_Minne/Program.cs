@@ -70,14 +70,59 @@ namespace SkalProj_Datastrukturer_Minne
              * In both cases, look at the count and capacity of the list
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
+             * 
+             * Frågor:
+             * 2 - När öokar listans kapacitet? => När Count == Capacity och vi lägger till ett nytt element.
+             * 3 - Med hur mycket ökar listans kapacitet? => Den dubblas.
+             * 4 - Varför ökar inte listans kapacitet på samma takt som element läggs till? => Jag tror listan tar en fixat antal på minnet och ställar en ny fixat antal när Capacity måste ökar.
+             * 5 - Minskar kapacitet när vi elementen tas bort från listan? => Nej. Kapacitet minska inte även om vi tomtar listan.
+             * 6 - När är det då fördelaktigt att använda en egendefinierad array istället för en lista? => 
+             *   När vi vill kontrollera när Capacity ska öka eller minska, eller vi vet att listan kommer ändras i stolek på en stor sätt dynamiskt.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            Console.WriteLine("Examining a list.\nThe list starts empty.\nType 'quit' to go back to the manu.\nYou can add or remove values to the list: '+Name' or '-Name'");
+            List<string> theList = new List<string>();
 
-            //switch(nav){...}
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide an input:");
+                string? input = Console.ReadLine() ?? null;
+                while (input == null || input.Length < 2)
+                {
+                    Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-Name'");
+                    input = Console.ReadLine() ?? null;
+                }
+
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        Console.WriteLine($"\nAdded {value} to the list.");
+                        Console.WriteLine($"List count: {theList.Count}, List capacity: {theList.Capacity}");
+                        break;
+                    case '-':
+                        if (theList.Remove(value))
+                        {
+                            Console.WriteLine($"\nRemoved {value} from the list.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\n{value} not found in the list.");
+                        }
+                        Console.WriteLine($"List count: {theList.Count}, List capacity: {theList.Capacity}");
+                        break;
+                    case 'q':
+                        if (input.ToLower() == "quit")
+                        {
+                            Console.WriteLine("Exiting to main menu.");
+                            return;
+                        }
+                        break;
+                }
+            }
         }
 
         /// <summary>
