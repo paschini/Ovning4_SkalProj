@@ -13,12 +13,14 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 5, 6, 7, 0) of your choice"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
                     + "\n5. Reverse Text"
+                    + "\n6. Recursive Even"
+                    + "\n7. Recursive Fibonnacci sequence"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -50,6 +52,12 @@ namespace SkalProj_Datastrukturer_Minne
                      */
                     case '5':
                         ReverseText();
+                        break;
+                    case '6':
+                        UseRecursiveEven();
+                        break;
+                    case '7':
+                        FibonacciSequence();
                         break;
                     case '0':
                         Environment.Exit(0);
@@ -110,13 +118,13 @@ namespace SkalProj_Datastrukturer_Minne
                     case '-':
                         if (theList.Remove(value))
                         {
-                            Console.WriteLine($"\nRemoved {value} from the list.");
+                            Console.WriteLine($"\nRemoved {value} from the list.\n");
                         }
                         else
                         {
-                            Console.WriteLine($"\n{value} not found in the list.");
+                            Console.WriteLine($"\n{value} not found in the list.\n");
                         }
-                        Console.WriteLine($"List count: {theList.Count}, List capacity: {theList.Capacity}");
+                        Console.WriteLine($"List count: {theList.Count}, List capacity: {theList.Capacity}\n");
                         break;
                     case 'q' or 'Q':
                         if (input.ToLower() == "quit")
@@ -173,13 +181,13 @@ namespace SkalProj_Datastrukturer_Minne
                         if (theQueue.Count > 0)
                         {
                             value = theQueue.Dequeue(); // removes from the top
-                            Console.WriteLine($"\nRemoved {value} from the list.");
+                            Console.WriteLine($"\nRemoved {value} from the list.\n");
                         }
                         else
                         {
-                            Console.WriteLine($"\nThe queue is empty.");
+                            Console.WriteLine($"\nThe queue is empty.\n");
                         }
-                        Console.WriteLine($"Queue count: {theQueue.Count}.");
+                        Console.WriteLine($"Queue count: {theQueue.Count}.\n");
                         break;
                     case 'q' or 'Q':
                         if (input.ToLower() == "quit")
@@ -233,19 +241,19 @@ namespace SkalProj_Datastrukturer_Minne
                     case '+':
                         theStack.Push(value); // adds to the top
                         Console.WriteLine($"\nAdded {value} to the list.");
-                        Console.WriteLine($"Queue count: {theStack.ToList().Count}");
+                        Console.WriteLine($"Stack count: {theStack.ToList().Count}");
                         break;
                     case '-':
                         if (theStack.Count > 0)
                         {
                             value = theStack.Pop(); // removes from the top
-                            Console.WriteLine($"\nRemoved {value} from the list.");
+                            Console.WriteLine($"\nRemoved {value} from the list.\n");
                         }
                         else
                         {
-                            Console.WriteLine($"\nThe queue is empty.");
+                            Console.WriteLine($"\nThe stack is empty.\n");
                         }
-                        Console.WriteLine($"Queue count: {theStack.Count}.");
+                        Console.WriteLine($"Stack count: {theStack.Count}.\n");
                         break;
                     case 'q' or 'Q':
                         if (input.Equals("quit")) // case insensitive check
@@ -298,7 +306,7 @@ namespace SkalProj_Datastrukturer_Minne
                 {
                     result += charStack.Pop();
                 }
-                Console.WriteLine($"Result: {result}");
+                Console.WriteLine($"Result: {result}\n");
             }
         }
 
@@ -332,7 +340,7 @@ namespace SkalProj_Datastrukturer_Minne
                     return;
                 }
 
-               Stack<char> charStack = new Stack<char>();
+                Stack<char> charStack = new Stack<char>();
                 foreach (char c in input)
                 {
                     if (c == '(' || c == '{' || c == '[' || c == '<')
@@ -346,21 +354,107 @@ namespace SkalProj_Datastrukturer_Minne
                             (c == '}' && popped != '{') ||
                             (c == ']' && popped != '[') ||
                             (c == '>' && popped != '<'))
-                        {
-                            Console.WriteLine($"The string is NOT Well formed.");
-                            charStack.Push(popped); // Push it back to avoid empty stack on malformed
-                            break;
+                        {   
+                            charStack.Push(popped); // Push it back to avoid empty stack
                         }
                     }
                 }
 
                 if (charStack.Count == 0)
                 {
-                    Console.WriteLine($"The string IS Well formed.");
+                    Console.WriteLine($"The string IS Well formed.\n");
+                } else
+                {
+                    Console.WriteLine($"The string is NOT Well formed.\n");
                 }
             }
         }
 
+        static void UseRecursiveEven()
+        {
+            /*
+             * Use this method to find the nth even number, using recursion.
+             * Example: 4 => true, 7 => false
+             */
+
+            Console.WriteLine("Check if a number is even, recursively.\nType 'quit' to go back to the manu.");
+
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the number:");
+                string input = Console.ReadLine() ?? "";
+
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+
+                int number;
+                while (!int.TryParse(input, out number))
+                {
+                    Console.WriteLine("Please provide a valid integer number:");
+                }
+
+                Console.WriteLine($"Calculating {input}th even number: {RecursiveEven(number)}\n");
+                break;
+            }
+        }
+
+        private static int RecursiveEven(int n)
+        {
+            if (n == 1)
+            {
+                return 2;
+            }
+            return RecursiveEven(n - 1) + 2;
+
+        }
+
+        static void FibonacciSequence()
+        {
+            /*
+             * Use this method to print the Fibonacci sequence up to the nth number, using recursion.
+             * Example: 5 => 0, 1, 1, 2, 3
+             */
+            Console.WriteLine("Print the Fibonacci sequence up to the nth number, recursively.\nType 'quit' to go back to the manu.");
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the number:");
+                string input = Console.ReadLine() ?? "";
+
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+
+                int n;
+                while (!int.TryParse(input, out n))
+                {
+                    Console.WriteLine("Please provide a valid integer number:");
+                }
+
+
+                Console.WriteLine($"Fibonacci sequence up to {n}th number: ");
+
+                for (int i = 1; i <= n; i++)
+                {
+                    Console.Write(Finbonnacci(i) + (i < n ? ", " : "\n\n"));
+                }
+
+                break;
+            }
+        }
+
+        private static int Finbonnacci(int n)
+        {
+
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            return Finbonnacci(n - 1) + Finbonnacci(n - 2);
+        }
     }
 }
 
