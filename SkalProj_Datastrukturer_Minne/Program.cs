@@ -308,6 +308,10 @@ namespace SkalProj_Datastrukturer_Minne
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
+             * 
+             * Frågor:
+             * Vilken datastruktur användar du?
+             * Svar: Stack - FILO lista :) för att det är perfekt för att hantera ordret av symboler.
              */
 
             Console.WriteLine("Check if a string is Well formed.\nType 'quit' to go back to the manu.");
@@ -328,8 +332,7 @@ namespace SkalProj_Datastrukturer_Minne
                     return;
                 }
 
-                string result = "";
-                Stack<char> charStack = new Stack<char>();
+               Stack<char> charStack = new Stack<char>();
                 foreach (char c in input)
                 {
                     if (c == '(' || c == '{' || c == '[' || c == '<')
@@ -345,7 +348,7 @@ namespace SkalProj_Datastrukturer_Minne
                             (c == '>' && popped != '<'))
                         {
                             Console.WriteLine($"The string is NOT Well formed.");
-                            charStack.Push(popped); // Push it back to avoid empty stack issues
+                            charStack.Push(popped); // Push it back to avoid empty stack on malformed
                             break;
                         }
                     }
@@ -353,7 +356,7 @@ namespace SkalProj_Datastrukturer_Minne
 
                 if (charStack.Count == 0)
                 {
-                    Console.WriteLine($"The string is Well formed.");
+                    Console.WriteLine($"The string IS Well formed.");
                 }
             }
         }
