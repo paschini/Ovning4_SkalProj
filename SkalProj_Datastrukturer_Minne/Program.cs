@@ -310,6 +310,52 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            Console.WriteLine("Check if a string is Well formed.\nType 'quit' to go back to the manu.");
+
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the string:");
+                string input = Console.ReadLine() ?? "";
+                while (input.Length < 1)
+                {
+                    Console.WriteLine("Please provide a string with more than 1 character");
+                    input = Console.ReadLine() ?? "";
+                }
+
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+
+                string result = "";
+                Stack<char> charStack = new Stack<char>();
+                foreach (char c in input)
+                {
+                    if (c == '(' || c == '{' || c == '[' || c == '<')
+                    {
+                        charStack.Push(c);
+                    }
+                    else if (c == ')' || c == '}' || c == ']' || c == '>')
+                    {
+                        char popped = charStack.Pop();
+                        if ((c == ')' && popped != '(') ||
+                            (c == '}' && popped != '{') ||
+                            (c == ']' && popped != '[') ||
+                            (c == '>' && popped != '<'))
+                        {
+                            Console.WriteLine($"The string is NOT Well formed.");
+                            charStack.Push(popped); // Push it back to avoid empty stack issues
+                            break;
+                        }
+                    }
+                }
+
+                if (charStack.Count == 0)
+                {
+                    Console.WriteLine($"The string is Well formed.");
+                }
+            }
         }
 
     }
