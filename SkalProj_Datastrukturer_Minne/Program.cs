@@ -397,7 +397,6 @@ namespace SkalProj_Datastrukturer_Minne
                 }
 
                 Console.WriteLine($"Calculating {input}th even number: {RecursiveEven(number)}\n");
-                break;
             }
         }
 
@@ -442,8 +441,6 @@ namespace SkalProj_Datastrukturer_Minne
                 {
                     Console.Write(Finbonnacci(i) + (i < n ? ", " : "\n\n"));
                 }
-
-                break;
             }
         }
 
