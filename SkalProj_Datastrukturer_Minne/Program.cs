@@ -18,6 +18,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
+                    + "\n5. Reverse Text"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -47,6 +48,9 @@ namespace SkalProj_Datastrukturer_Minne
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
                      */
+                    case '5':
+                        ReverseText();
+                        break;
                     case '0':
                         Environment.Exit(0);
                         break;
@@ -114,13 +118,19 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         Console.WriteLine($"List count: {theList.Count}, List capacity: {theList.Capacity}");
                         break;
-                    case 'q':
+                    case 'q' or 'Q':
                         if (input.ToLower() == "quit")
                         {
                             Console.WriteLine("Exiting to main menu.");
                             return;
                         }
                         break;
+                    default:
+                        {
+                            Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-Name'");
+                            input = Console.ReadLine() ?? null;
+                            break;
+                        }
                 }
             }
         }
@@ -135,6 +145,57 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+
+            Console.WriteLine("Examining a queue.\nThe queue starts empty.\nType 'quit' to go back to the manu.\nWe always revome  the first element.\nYou can add or remove people to the queue: '+Name' or '-'");
+            Queue<string> theQueue = new();
+
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide an input:");
+                string? input = Console.ReadLine() ?? null;
+                while (input == null || input.Length < 1)
+                {
+                    Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-'");
+                    input = Console.ReadLine() ?? null;
+                }
+
+                char nav = input[0];
+                string value = input.Substring(1) ?? "";
+
+                switch (nav)
+                {
+                    case '+':
+                        theQueue.Enqueue(value); // adds to the end
+                        Console.WriteLine($"\nAdded {value} to the list.");
+                        Console.WriteLine($"Queue count: {theQueue.ToList().Count}");
+                        break;
+                    case '-':
+                        if (theQueue.Count > 0)
+                        {
+                            value = theQueue.Dequeue(); // removes from the top
+                            Console.WriteLine($"\nRemoved {value} from the list.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\nThe queue is empty.");
+                        }
+                        Console.WriteLine($"Queue count: {theQueue.Count}.");
+                        break;
+                    case 'q' or 'Q':
+                        if (input.ToLower() == "quit")
+                        {
+                            Console.WriteLine("Exiting to main menu.");
+                            return;
+                        }
+                        break;
+                    default:
+                        {
+                            Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-'");
+                            input = Console.ReadLine() ?? null;
+                            break;
+                        }
+                }
+            }
         }
 
         /// <summary>
@@ -146,7 +207,99 @@ namespace SkalProj_Datastrukturer_Minne
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
+             * 
+             * Frågor:
+             * 1 - Vaför är det inte smart att använda en stack i det här fallet? => första kund som stör i köan skulle bli arg, och kanske kommer aldrig blir expedierad.
             */
+
+            Console.WriteLine("Examining a queue.\nThe queue starts empty.\nType 'quit' to go back to the manu.\nWe always revome  the first element.\nYou can add or remove people to the queue: '+Name' or '-'");
+            Stack<string> theStack = new();
+
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide an input:");
+                string? input = Console.ReadLine() ?? null;
+                while (input == null || input.Length < 1)
+                {
+                    Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-'");
+                    input = Console.ReadLine() ?? null;
+                }
+
+                char nav = input[0];
+                string value = input.Substring(1) ?? "";
+
+                switch (nav)
+                {
+                    case '+':
+                        theStack.Push(value); // adds to the top
+                        Console.WriteLine($"\nAdded {value} to the list.");
+                        Console.WriteLine($"Queue count: {theStack.ToList().Count}");
+                        break;
+                    case '-':
+                        if (theStack.Count > 0)
+                        {
+                            value = theStack.Pop(); // removes from the top
+                            Console.WriteLine($"\nRemoved {value} from the list.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\nThe queue is empty.");
+                        }
+                        Console.WriteLine($"Queue count: {theStack.Count}.");
+                        break;
+                    case 'q' or 'Q':
+                        if (input.Equals("quit")) // case insensitive check
+                        {
+                            Console.WriteLine("Exiting to main menu.");
+                            return;
+                        }
+                        break;
+                    default:
+                        {
+                            Console.WriteLine("Please provide an input that fulfills the form: '+Name' or '-'");
+                            input = Console.ReadLine() ?? null;
+                            break;
+                        }
+                }
+            }
+        }
+
+        static void ReverseText()
+        {
+            /*
+             * Use this method to reverse a string using a stack.
+             * Example: "Hello World" => "dlroW olleH"
+             */
+            Console.WriteLine("Reverse a text.\nType 'quit' to go back to the manu.");
+
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the text:");
+                string input = Console.ReadLine() ?? "";
+                while (input.Length < 1)
+                {
+                    Console.WriteLine("Please provide text with more than 1 character");
+                    input = Console.ReadLine() ?? "";
+                }
+
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+
+                string result = "";
+                Stack<char> charStack = new Stack<char>();
+                foreach (char c in input)
+                {
+                    charStack.Push(c);
+                }
+                while (charStack.Count > 0)
+                {
+                    result += charStack.Pop();
+                }
+                Console.WriteLine($"Result: {result}");
+            }
         }
 
         static void CheckParanthesis()
