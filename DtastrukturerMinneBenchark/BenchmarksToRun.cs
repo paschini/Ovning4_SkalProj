@@ -2,6 +2,7 @@
 
 namespace DatastrukturerMinneBenchark
 {
+    [MemoryDiagnoser]
     public class BenchmarksToRun
     {
         [Benchmark]

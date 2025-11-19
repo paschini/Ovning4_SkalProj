@@ -91,13 +91,6 @@ namespace SkalProj_Datastrukturer_Minne
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
              * 
-             * Frågor:
-             * 2 - När öokar listans kapacitet? => När Count == Capacity och vi lägger till ett nytt element.
-             * 3 - Med hur mycket ökar listans kapacitet? => Den dubblas.
-             * 4 - Varför ökar inte listans kapacitet på samma takt som element läggs till? => Jag tror listan tar en fixat antal på minnet och ställar en ny fixat antal när Capacity måste ökar.
-             * 5 - Minskar kapacitet när vi elementen tas bort från listan? => Nej. Kapacitet minska inte även om vi tomtar listan.
-             * 6 - När är det då fördelaktigt att använda en egendefinierad array istället för en lista? => 
-             *   När vi vill kontrollera när Capacity ska öka eller minska, eller vi vet att listan kommer ändras i stolek på en stor sätt dynamiskt.
             */
 
             Console.WriteLine("Examining a list.\nThe list starts empty.\nType 'quit' to go back to the manu.\nYou can add or remove values to the list: '+Name' or '-Name'");
@@ -223,9 +216,6 @@ namespace SkalProj_Datastrukturer_Minne
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
-             * 
-             * Frågor:
-             * 1 - Vaför är det inte smart att använda en stack i det här fallet? => första kund som stör i köan skulle bli arg, och kanske kommer aldrig blir expedierad.
             */
 
             Console.WriteLine("Examining a queue.\nThe queue starts empty.\nType 'quit' to go back to the manu.\nWe always revome  the first element.\nYou can add or remove people to the queue: '+Name' or '-'");
@@ -325,9 +315,6 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              * 
-             * Frågor:
-             * Vilken datastruktur användar du?
-             * Svar: Stack - FILO lista :) för att det är perfekt för att hantera ordret av symboler.
              */
 
             Console.WriteLine("Check if a string is Well formed.\nType 'quit' to go back to the manu.");
