@@ -455,8 +455,7 @@ namespace SkalProj_Datastrukturer_Minne
         private static int Finbonnacci(int n)
         {
 
-            if (n == 0) return 0;
-            if (n == 1) return 1;
+            if (n <= 1) return n;
 
             return Finbonnacci(n - 1) + Finbonnacci(n - 2);
         }
@@ -520,26 +519,32 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 
                 Console.Write($"Fibonacci sequence up to {number}th number: ");
-                int[] resultList = [0, 1];
-                for (int i = 0; i <= number; i++)
+                //int[] resultList = [0, 1];
+                int a = 0;
+                int b = 1;
+                int c = 0;
+                for (int i = 1; i <= number; i++)
                 {
                     int result = 0;
-                    if (i == 0)
-                    {
-                        result = 0;
-                        Console.Write(result + (i < number ? ", " : " "));
-                    }
-                    else if (i == 1)
-                    {
-                        result = 1;
-                        Console.Write(result + (i < number ? ", " : " "));
-                    }
-                    else
-                    {
-                        result = (resultList[i - 1]) + (resultList[i - 2]);
-                        resultList = resultList.Append(result).ToArray();
-                        Console.Write(result + (i < number ? ", " : " "));
-                    }
+                    //if (i <= 1)
+                    //{
+                    //    result = i;
+                    //    Console.Write(result + (i < number ? ", " : " "));
+                    //}
+                    //else
+                    //{
+                    //    result = (resultList[i - 1]) + (resultList[i - 2]);
+                    //    resultList = resultList.Append(result).ToArray();
+                    //    Console.Write(result + (i < number ? ", " : " "));
+                    //}
+                    if (number <= 1) result = number;
+
+                    c = a + b;
+                    a = b;
+                    b = c;
+
+                    result = c;
+                    Console.Write(result + (i < number ? ", " : " "));
                 }
             }
         }
