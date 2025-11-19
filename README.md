@@ -36,7 +36,7 @@ Det finns en benchmark projekt inkluderad i lösningen som mäter prestanda för ol
 
 ## Ansvarar på frågorna:
 
-- **När öokar listans kapacitet?** => När Count == Capacity och vi lägger till ett nytt element.
+- **När ökar listans kapacitet?** => När Count == Capacity och vi lägger till ett nytt element.
 - **Med hur mycket ökar listans kapacitet?** => Den dubblas.
 - **Varför ökar inte listans kapacitet på samma takt som element läggs till?**
 => Jag tror listan tar en fixat antal på minnet och ställar en ny fixat antal när Capacity måste ökar.
