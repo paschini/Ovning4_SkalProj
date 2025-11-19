@@ -520,22 +520,24 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 
                 Console.Write($"Fibonacci sequence up to {number}th number: ");
-                int result = 0;
+                int[] resultList = [0, 1];
                 for (int i = 0; i <= number; i++)
                 {
+                    int result = 0;
                     if (i == 0)
                     {
                         result = 0;
                         Console.Write(result + (i < number ? ", " : " "));
-                    } 
+                    }
                     else if (i == 1)
                     {
                         result = 1;
                         Console.Write(result + (i < number ? ", " : " "));
-                    } else 
+                    }
+                    else
                     {
-
-                        result = Finbonnacci(i - 1) + Finbonnacci(i - 2);
+                        result = (resultList[i - 1]) + (resultList[i - 2]);
+                        resultList = resultList.Append(result).ToArray();
                         Console.Write(result + (i < number ? ", " : " "));
                     }
                 }
