@@ -5,7 +5,7 @@ namespace SkalProj_Datastrukturer_Minne
     class Program
     {
         /// <summary>
-        /// The main method, vill handle the menues for the program
+        /// The main method, will handle the menus for the program
         /// </summary>
         /// <param name="args"></param>
         static void Main()
@@ -21,6 +21,8 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n5. Reverse Text"
                     + "\n6. Recursive Even"
                     + "\n7. Recursive Fibonnacci sequence"
+                    + "\n8. Iterative Even"
+                    + "\n9. Iterative Fibonnacci sequence"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -58,6 +60,12 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case '7':
                         FibonacciSequence();
+                        break;
+                    case '8':
+                        IterativeEven();
+                        break;
+                    case '9':
+                        IterativeFibonacci();
                         break;
                     case '0':
                         Environment.Exit(0);
@@ -354,7 +362,7 @@ namespace SkalProj_Datastrukturer_Minne
                             (c == '}' && popped != '{') ||
                             (c == ']' && popped != '[') ||
                             (c == '>' && popped != '<'))
-                        {   
+                        {
                             charStack.Push(popped); // Push it back to avoid empty stack
                         }
                     }
@@ -396,7 +404,7 @@ namespace SkalProj_Datastrukturer_Minne
                     Console.WriteLine("Please provide a valid integer number:");
                 }
 
-                Console.WriteLine($"Calculating {input}th even number: {RecursiveEven(number)}\n");
+                Console.WriteLine($"The {input}th even number: {RecursiveEven(number)}\n");
             }
         }
 
@@ -451,6 +459,87 @@ namespace SkalProj_Datastrukturer_Minne
             if (n == 1) return 1;
 
             return Finbonnacci(n - 1) + Finbonnacci(n - 2);
+        }
+
+        private static void IterativeEven()
+        {
+            /*
+             * Use this method to find the nth even number, using iteration.
+             * Example: 4 => true, 7 => false
+             */
+            Console.WriteLine("Check if a number is even, iteratively.\nType 'quit' to go back to the manu.");
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the number:");
+                string input = Console.ReadLine() ?? "";
+
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+
+                int number;
+                while (!int.TryParse(input, out number))
+                {
+                    Console.WriteLine("Please provide a valid number:");
+                }
+
+                int result = 2;
+                for (int i = 1; i < number; i++)
+                {
+                    result += 2;
+                }
+
+                Console.WriteLine($"The {input}th even number: {result}\n");
+            }
+        }
+
+        private static void IterativeFibonacci()
+        {
+            /*
+             * Use this method to print the Fibonacci sequence up to the nth number, using iteration.
+             * Example: 5 => 0, 1, 1, 2, 3
+             */
+            Console.WriteLine("Print the Fibonacci sequence up to the nth number, iteratively.\nType 'quit' to go back to the manu.");
+            while (true)
+            {
+                Console.WriteLine("\nPlease provide the number:");
+                string input = Console.ReadLine() ?? "";
+               
+                if (input.Equals("quit"))
+                {
+                    Console.WriteLine("Exiting to main menu.");
+                    return;
+                }
+                
+                int number;
+                while (!int.TryParse(input, out number))
+                {
+                    Console.WriteLine("Please provide a valid integer number:");
+                }
+                
+                Console.Write($"Fibonacci sequence up to {number}th number: ");
+                int result = 0;
+                for (int i = 0; i <= number; i++)
+                {
+                    if (i == 0)
+                    {
+                        result = 0;
+                        Console.Write(result + (i < number ? ", " : " "));
+                    } 
+                    else if (i == 1)
+                    {
+                        result = 1;
+                        Console.Write(result + (i < number ? ", " : " "));
+                    } else 
+                    {
+
+                        result = Finbonnacci(i - 1) + Finbonnacci(i - 2);
+                        Console.Write(result + (i < number ? ", " : " "));
+                    }
+                }
+            }
         }
     }
 }
